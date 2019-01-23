@@ -1,4 +1,4 @@
-Vue.component('q-option', {
+Vue.component('q-test', {
   props: ['option', 'groupid'],
   template: `
         <div>
@@ -13,7 +13,8 @@ new Vue({
   data: {
     status: "",
     metaData: [],
-    inombre: 'primerCuestonario'
+    inombre: 'primerCuestonario',
+    JSONObj:{}
   },
   methods: {
     connect() {
@@ -38,8 +39,8 @@ new Vue({
       //var str = evt.data;
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
       //console.log(jvs);
-      JSONObj = JSON.parse(jvs);
-      console.log(JSONObj);
+      this.JSONObj = JSON.parse(jvs);
+      console.log(this.JSONObj);
     },
     sendMessage(msgData) {
       json = JSON.stringify(msgData);

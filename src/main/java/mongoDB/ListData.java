@@ -9,10 +9,9 @@ import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Projections.excludeId;
 
 public class ListData {
-	private String json = "{\"question\":[";
-	//private String json = "[";
 
 	public String getData(String nomTest) {
+		String json = "{\"name\":\""+ nomTest+"\",\"question\":[";
 		Mongo mongodb = new Mongo();
 		mongodb.connectDatabase();
 

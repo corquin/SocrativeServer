@@ -31,16 +31,14 @@
             <input type="text" class="form-control" placeholder="Nombre Cuestionario" v-model="inombre">
             <button type="button" class="btn btn-primary" @click="connect">Ingresar</button>
           </div>
-
         </form>
-        <div v-if="status ==='connected'">
-
-        </div>
-
       </div>
-
+    </div>
+    <div v-if="status ==='connected'">
+      <h2>QUIZ: {{JSONObj.name}}</h2>
     </div>
   </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="js/test.js"></script>
