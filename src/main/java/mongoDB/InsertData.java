@@ -23,12 +23,21 @@ public class InsertData {
 
 	public ArrayList<String> sacarObjeto(String jo) {
 		ArrayList<String> preguntas = new ArrayList<String>();
+		jo = jo.substring(1, jo.length()-1);
+		jo = (jo + "!");
 		String temPre = "";
-		for (int i = 1; i < jo.length(); i++) {
+		int est = 0;
+		for (int i = 0; i < jo.length(); i++) {
+			if (jo.charAt(i) == ':' && jo.charAt(i+1) == '[') {
+				est = 0;
+			}
 			if (jo.charAt(i) == ']') {
+				est = 1;
+			}
+			if (jo.charAt(i) == '!') {
 				preguntas.add(temPre);
-			} else {
-				if (jo.charAt(i) == '}' && jo.charAt(i + 1) == ',' && jo.charAt(i + 2) == '{') {
+			} else {				
+				if (jo.charAt(i) == '}' && jo.charAt(i + 1) == ',' && jo.charAt(i + 2) == '{' && est == 1) {
 					preguntas.add(temPre + jo.charAt(i));
 					temPre = "";
 					i = (i + 1);

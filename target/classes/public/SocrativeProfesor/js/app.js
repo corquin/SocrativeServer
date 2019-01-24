@@ -31,11 +31,14 @@ const app = new Vue({
       this.cuestonario.push({
         tipo: '1',
         pregunta: this.ipregunta,
-        opciones: {
-          opc1: this.resp1,
+        opciones: [
+          {id:1, opc:this.resp1},
+          {id:2, opc:this.resp2},
+          {id:3, opc:this.resp3}
+          /*opc1: this.resp1,
           opc2: this.resp2,
-          opc3: this.resp3,
-        },
+          opc3: this.resp3,*/
+        ],
         valida: this.rValida
       });
       app.clear();
@@ -65,9 +68,9 @@ const app = new Vue({
         case '1':
           this.seeMO = true;
           this.ipregunta = this.cuestonario[iindex].pregunta;
-          this.resp1 = this.cuestonario[iindex].opciones.opc1;
-          this.resp2 = this.cuestonario[iindex].opciones.opc2;
-          this.resp3 = this.cuestonario[iindex].opciones.opc3;
+          this.resp1 = this.cuestonario[iindex].opciones[0].opc;
+          this.resp2 = this.cuestonario[iindex].opciones[1].opc;
+          this.resp3 = this.cuestonario[iindex].opciones[2].opc;
           this.rValida = this.cuestonario[iindex].valida;
           break;
 
@@ -88,12 +91,11 @@ const app = new Vue({
       //localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
     actualizarTarea: function(){
-
         if(this.cuestonario[this.index].tipo == '1'){
           this.cuestonario[this.index].pregunta = this.ipregunta;
-          this.cuestonario[this.index].opciones.opc1 = this.resp1;
-          this.cuestonario[this.index].opciones.opc2 = this.resp2;
-          this.cuestonario[this.index].opciones.opc3 = this.resp3;
+          this.cuestonario[this.index].opciones[0].opc = this.resp1;
+          this.cuestonario[this.index].opciones[1].opc = this.resp2;
+          this.cuestonario[this.index].opciones[2].opc = this.resp3;
           this.cuestonario[this.index].valida = this.rValida;
         }
 
