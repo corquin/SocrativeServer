@@ -1,10 +1,34 @@
-Vue.component('q-test', {
+Vue.component('q-option1', {
+  props: ['opcion', 'groupid'],
+  template: `
+        <label>
+            <input type="radio" :name="groupid" :value="opcion.id" :v-model="option"> {{opcion.opc}}
+        </label>
+    `
+});
+Vue.component('q-option2', {
+  data: function(){
+    return{
+      verdadero:"verdadero",
+      falso:"falso"
+    }
+  },
+  props: ['groupid'],
+  template: `
+        <label>
+          <input type="radio" :name="groupid" :value="verdadero"> Verdadero
+        </label>
+        <label>
+          <input type="radio" :name="groupid" :value="falso"> Falso
+        </label>
+    `
+});
+Vue.component('q-option3', {
   props: ['option', 'groupid'],
   template: `
-        <div>
-            <input type="radio" :name="groupid" :value="option.id"> {{ option.text }}
-        </div>
-
+        <label>
+          <input type="text" :name="groupid">
+        </label>
     `
 });
 
@@ -13,7 +37,7 @@ new Vue({
   data: {
     status: "",
     metaData: [],
-    inombre: 'primerCuestonario',
+    inombre: 'personal',
     JSONObj:{}
   },
   methods: {

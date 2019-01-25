@@ -1,24 +1,25 @@
 const app = new Vue({
   el: '#app',
   data: {
-      titulo: 'Mi Socrative',
-      seeMO: false,
-      seeVF: false,
-      seeRC: false,
+    titulo: 'Mi Socrative',
+    seeMO: false,
+    seeVF: false,
+    seeRC: false,
 
-      ag: false,
-      ac: false,
+    ag: false,
+    ac: false,
 
-      metaData:[],
-      inombre: '',
-      cuestonario: [],
-      ipregunta: '',
-      resp1: '',
-      resp2: '',
-      resp3: '',
-      rValida: '',
-      index:''
-    },
+    metaData: [],
+    inombre: '',
+    cuestonario: [],
+    idp: 0,
+    ipregunta: '',
+    resp1: '',
+    resp2: '',
+    resp3: '',
+    rValida: '',
+    index: '',
+  },
   methods: {
     clear: function() {
       this.ipregunta = '';
@@ -28,16 +29,23 @@ const app = new Vue({
       this.rValida = '';
     },
     multiOpcion: function() {
+      this.idp = this.idp + 1;
       this.cuestonario.push({
+        id: this.idp,
         tipo: '1',
         pregunta: this.ipregunta,
-        opciones: [
-          {id:1, opc:this.resp1},
-          {id:2, opc:this.resp2},
-          {id:3, opc:this.resp3}
-          /*opc1: this.resp1,
-          opc2: this.resp2,
-          opc3: this.resp3,*/
+        opciones: [{
+            id: 1,
+            opc: this.resp1
+          },
+          {
+            id: 2,
+            opc: this.resp2
+          },
+          {
+            id: 3,
+            opc: this.resp3
+          }
         ],
         valida: this.rValida
       });
@@ -45,7 +53,9 @@ const app = new Vue({
       localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
     VFOption: function() {
+      this.idp = this.idp + 1;
       this.cuestonario.push({
+        id: this.idp,
         tipo: '2',
         pregunta: this.ipregunta,
         valida: this.rValida
@@ -54,7 +64,9 @@ const app = new Vue({
       localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
     RCorta: function() {
+      this.idp = this.idp + 1;
       this.cuestonario.push({
+        id: this.idp,
         tipo: '3',
         pregunta: this.ipregunta,
         valida: this.rValida
@@ -64,7 +76,7 @@ const app = new Vue({
     },
     editarTarea: function(iindex) {
       this.index = iindex;
-      switch(this.cuestonario[iindex].tipo){
+      switch (this.cuestonario[iindex].tipo) {
         case '1':
           this.seeMO = true;
           this.ipregunta = this.cuestonario[iindex].pregunta;
@@ -90,24 +102,24 @@ const app = new Vue({
       //this.cuestonario[index].estado = true;
       //localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
-    actualizarTarea: function(){
-        if(this.cuestonario[this.index].tipo == '1'){
-          this.cuestonario[this.index].pregunta = this.ipregunta;
-          this.cuestonario[this.index].opciones[0].opc = this.resp1;
-          this.cuestonario[this.index].opciones[1].opc = this.resp2;
-          this.cuestonario[this.index].opciones[2].opc = this.resp3;
-          this.cuestonario[this.index].valida = this.rValida;
-        }
+    actualizarTarea: function() {
+      if (this.cuestonario[this.index].tipo == '1') {
+        this.cuestonario[this.index].pregunta = this.ipregunta;
+        this.cuestonario[this.index].opciones[0].opc = this.resp1;
+        this.cuestonario[this.index].opciones[1].opc = this.resp2;
+        this.cuestonario[this.index].opciones[2].opc = this.resp3;
+        this.cuestonario[this.index].valida = this.rValida;
+      }
 
-        if(this.cuestonario[this.index].tipo == '2'){
-          this.cuestonario[this.index].pregunta = this.ipregunta;
-          this.cuestonario[this.index].valida = this.rValida;
-        }
+      if (this.cuestonario[this.index].tipo == '2') {
+        this.cuestonario[this.index].pregunta = this.ipregunta;
+        this.cuestonario[this.index].valida = this.rValida;
+      }
 
-        if(this.cuestonario[this.index].tipo == '3'){
-          this.cuestonario[this.index].pregunta = this.ipregunta;
-          this.cuestonario[this.index].valida = this.rValida;
-        }
+      if (this.cuestonario[this.index].tipo == '3') {
+        this.cuestonario[this.index].pregunta = this.ipregunta;
+        this.cuestonario[this.index].valida = this.rValida;
+      }
 
       localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
@@ -115,7 +127,7 @@ const app = new Vue({
       this.cuestonario.splice(index, 1);
       localStorage.setItem('data-vue', JSON.stringify(this.cuestonario));
     },
-    enviarBackEnd(){
+    enviarBackEnd() {
       this.metaData.push({
         nombre: this.inombre
       });

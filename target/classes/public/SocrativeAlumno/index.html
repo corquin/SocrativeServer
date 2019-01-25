@@ -31,16 +31,27 @@
             <input type="text" class="form-control" placeholder="Nombre Cuestionario" v-model="inombre">
             <button type="button" class="btn btn-primary" @click="connect">Ingresar</button>
           </div>
-
         </form>
-        <div v-if="status ==='connected'">
-
+      </div>
+    </div>
+    <div v-if="status ==='connected'">
+      <h2>QUIZ: {{JSONObj.name}}</h2>
+      <div v-for="question in JSONObj.question">
+        <h4>{{ question.pregunta }}</h4>
+        <div v-if="question.tipo === '1'">
+          <q-option1 v-for="opt in question.opciones" v-bind:opcion="opt" v-bind:groupid="test"></q-option1>
         </div>
-
+        <div v-if="question.tipo === '2'">
+          <q-option2></q-option2>
+        </div>
+        <div v-if="question.tipo === '3'">
+          <q-option3></q-option3>
+        </div>
       </div>
 
     </div>
   </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="js/test.js"></script>

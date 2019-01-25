@@ -1,10 +1,38 @@
+Vue.component('q-option1', {
+  props: ['opcion', 'groupid'],
+  template: `
+        <div>
+          <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
+        </div>
+
+    `
+});
+Vue.component('q-option2', {
+  props: ['option', 'groupid'],
+  template: `
+        <div>
+            hola2
+        </div>
+
+    `
+});
+Vue.component('q-option3', {
+  props: ['option', 'groupid'],
+  template: `
+        <div>
+            hola3
+        </div>
+
+    `
+});
+
 new Vue({
   el: "#test",
   data: {
     status: "",
     metaData: [],
-    inombre: 'primerCuestonario',
-    cuestionario: {}
+    inombre: 'personal',
+    JSONObj:{}
   },
   methods: {
     connect() {
@@ -26,14 +54,11 @@ new Vue({
       alert("Usuario fallido");
     },
     messageWs(evt) {
-      var str = evt.data;
-      str = str
-      .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})
-      .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'});
-      console.log(str);
-      this.cuestionario = JSON.parse(str);
-      console.log(evt.data);
-      console.log(this.cuestonario);
+      //var str = evt.data;
+      var jvs = JSON.stringify(eval("(" + evt.data + ")"));
+      //console.log(jvs);
+      this.JSONObj = JSON.parse(jvs);
+      console.log(this.JSONObj);
     },
     sendMessage(msgData) {
       json = JSON.stringify(msgData);
