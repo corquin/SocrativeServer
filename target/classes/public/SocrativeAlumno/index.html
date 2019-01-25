@@ -20,7 +20,7 @@
   <h1 id="title_form">My Socrative</h1>
   <br>
   <br>
-  <div class="modal-dialog text-center" id="test">
+  <div id="test">
     <div class="modal-content" v-if="!status">
       <div class="col-12 user-img">
         <img src="images/lo.jpg" th:src="@{/img/user.png}" />
@@ -34,22 +34,33 @@
         </form>
       </div>
     </div>
-    <div v-if="status ==='connected'">
+    <form v-if="status ==='connected'">
       <h2>QUIZ: {{JSONObj.name}}</h2>
       <div v-for="question in JSONObj.question">
         <h4>{{ question.pregunta }}</h4>
         <div v-if="question.tipo === '1'">
-          <q-option1 v-for="opt in question.opciones" v-bind:opcion="opt" v-bind:groupid="test"></q-option1>
+          <fieldset>
+            <legend>Eligue una respuesta</legend>
+            <q-option1 v-for="opt in question.opciones" :key="opt.id" v-bind:opcion="opt" v-bind:groupid="question.id"></q-option1>
+          </fieldset>
         </div>
         <div v-if="question.tipo === '2'">
-          <q-option2></q-option2>
+          <fieldset>
+            <legend>Eligue una respuesta</legend>
+            <q-option2 v-bind:groupid="question.id"></q-option2>
+          </fieldset>
         </div>
         <div v-if="question.tipo === '3'">
-          <q-option3></q-option3>
+          <fieldset>
+            <legend>Eligue una respuesta</legend>
+            <q-option3 v-bind:groupid="question.id"></q-option3>
+          </fieldset>
         </div>
       </div>
 
-    </div>
+      <button type="button" name="button">Enviar Respuesta</button>
+
+    </form>
   </div>
 
 

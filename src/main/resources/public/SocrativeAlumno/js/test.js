@@ -2,7 +2,7 @@ Vue.component('q-option1', {
   props: ['opcion', 'groupid'],
   template: `
         <label>
-            <input type="radio" :name="groupid" :value="opcion.id" :v-model="option"> {{opcion.opc}}
+            <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
         </label>
     `
 });
@@ -15,12 +15,7 @@ Vue.component('q-option2', {
   },
   props: ['groupid'],
   template: `
-        <label>
-          <input type="radio" :name="groupid" :value="verdadero"> Verdadero
-        </label>
-        <label>
-          <input type="radio" :name="groupid" :value="falso"> Falso
-        </label>
+        <div>hola</div>
     `
 });
 Vue.component('q-option3', {

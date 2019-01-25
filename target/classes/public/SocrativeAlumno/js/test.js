@@ -1,28 +1,34 @@
 Vue.component('q-option1', {
   props: ['opcion', 'groupid'],
   template: `
-        <div>
-          <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
-        </div>
-
+        <label>
+            <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
+        </label>
     `
 });
 Vue.component('q-option2', {
-  props: ['option', 'groupid'],
+  data: function(){
+    return{
+      verdadero:"verdadero",
+      falso:"falso"
+    }
+  },
+  props: ['groupid'],
   template: `
-        <div>
-            hola2
-        </div>
-
+        <label>
+          <input type="radio" :name="groupid" :value="verdadero"> Verdadero
+        </label>
+        <label>
+          <input type="radio" :name="groupid" :value="falso"> Falso
+        </label>
     `
 });
 Vue.component('q-option3', {
   props: ['option', 'groupid'],
   template: `
-        <div>
-            hola3
-        </div>
-
+        <label>
+          <input type="text" :name="groupid">
+        </label>
     `
 });
 
