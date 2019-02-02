@@ -13,7 +13,7 @@ public class ListData {
 	public String getData(String nomTest) {
 		String json = "{\"name\":\""+ nomTest+"\",\"question\":[";
 		Mongo mongodb = new Mongo();
-		mongodb.connectDatabase();
+		mongodb.connectDatabase("cuestonario");
 
 		MongoCollection<Document> collection = mongodb.getMongodb().getCollection(nomTest);
 

@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jetty.websocket.api.Session;
 
 import handler.SocrativeWSHandler;
+import mongoDB.InsertData;
 import mongoDB.ListData;
 
 public class AlumWSSocrative {
@@ -42,6 +43,7 @@ public class AlumWSSocrative {
 				}
 				if (numMsg == 2) {
 					System.out.println(message);
+					new InsertData().insertResult(message);
 					// new InsertData().insert(message, nomTest.replace("\"", ""));
 					numMsg = 0;
 				}

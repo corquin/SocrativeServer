@@ -7,19 +7,17 @@ Vue.component('q-option1', {
     `
 });
 Vue.component('q-option2', {
-  data: function(){
+  /*data: function(){
     return{
       verdadero:"verdadero",
       falso:"falso"
     }
-  },
+  },*/
   props: ['groupid'],
   template: `
         <label>
-          <input type="radio" :name="groupid" :value="verdadero"> Verdadero
-        </label>
-        <label>
-          <input type="radio" :name="groupid" :value="falso"> Falso
+          <input type="radio" :name="groupid" value="1">Verdadero
+          <input type="radio" :name="groupid" value="2">Falso
         </label>
     `
 });
@@ -36,11 +34,40 @@ new Vue({
   el: "#test",
   data: {
     status: "",
+    key: "",
     metaData: [],
     inombre: 'personal',
-    JSONObj:{}
+    JSONObj: {},
+    respuestas: []
   },
   methods: {
+    guarda: function() {
+      /*for (var key in this.JSONObj.question) {
+        console.log(this.JSONObj.question[key].id);
+      }*/
+      for (var sjson in this.JSONObj.question) {
+        this.key = this.JSONObj.question[sjson].id;
+        var result = 0;
+        var radios = document.getElementsByName(this.key);
+        //console.log(radios);
+        if (this.JSONObj.question[sjson].tipo == 3) {
+
+        } else {
+          for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+              result = radios[i].value;
+            }
+          }
+        }
+        this.respuestas.push({
+          id: this.key,
+          pregunta: this.JSONObj.question[sjson].pregunta,
+          respuesta: result
+        });
+      }
+      console.log(this.respuestas);
+      this.sendMessage(this.respuestas);
+    },
     connect() {
       socket = new WebSocket("ws://localhost:4567/alumno");
       socket.onopen = this.openWs;
