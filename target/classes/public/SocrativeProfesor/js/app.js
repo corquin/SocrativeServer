@@ -65,6 +65,7 @@ const app = new Vue({
     },
     RCorta: function() {
       this.idp = this.idp + 1;
+      console.log(this.idp);
       this.cuestonario.push({
         id: this.idp,
         tipo: '3',
@@ -94,7 +95,6 @@ const app = new Vue({
 
         case '3':
           this.seeRC = true;
-
           this.ipregunta = this.cuestonario[iindex].pregunta;
           this.rValida = this.cuestonario[iindex].valida;
           break;
@@ -170,6 +170,7 @@ const app = new Vue({
       this.cuestonario = [];
     } else {
       this.cuestonario = bd;
+      this.idp = this.cuestonario.length;
     }
   }
 });

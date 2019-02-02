@@ -23,9 +23,9 @@ public class Mongo {
 		this.mongodb = mongodb;
 	}
 
-	public void connectDatabase() {
+	public void connectDatabase(String nombre) {
 		setMongoClient(new MongoClient());
-		setMongodb(getMongoClient().getDatabase("cuestonario"));
+		setMongodb(getMongoClient().getDatabase(nombre));
 	}
 
 }

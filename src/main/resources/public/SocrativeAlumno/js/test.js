@@ -47,10 +47,10 @@ new Vue({
       }*/
       for (var sjson in this.JSONObj.question) {
         this.key = this.JSONObj.question[sjson].id;
-        var result = "0";        
+        var result = "0";
         //console.log(radios);
         if (this.JSONObj.question[sjson].tipo == 3) {
-          result = document.getElementById(this.key).value;
+          result = document.getElementsByName(this.key)[0].value;
         } else {
           var radios = document.getElementsByName(this.key);
           for (var i = 0; i < radios.length; i++) {
