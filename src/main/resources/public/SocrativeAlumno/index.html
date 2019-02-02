@@ -21,7 +21,8 @@
   <br>
   <br>
   <div id="test">
-    <div class="modal-content" v-if="!status">
+    
+    <div class="modal-content" v-if="!status" id="form">
       <div class="col-12 user-img">
         <img src="images/lo.jpg" th:src="@{/img/user.png}" />
       </div>
@@ -29,36 +30,47 @@
         <form class="col-12" th:action="@{/login}">
           <div class="form-group" id="user-group">
             <input type="text" class="form-control" placeholder="Nombre Cuestionario" v-model="inombre">
+            <br>
             <button type="button" class="btn btn-primary" @click="connect">Ingresar</button>
           </div>
         </form>
       </div>
     </div>
+
     <form v-if="status ==='connected'">
-      <h2>QUIZ: {{JSONObj.name}}</h2>
-      <div v-for="question in JSONObj.question">
-        <h4>{{ question.pregunta }}</h4>
-        <div v-if="question.tipo === '1'">
+      <center>
+        <h3 style="color: #2874A6;">Nombre Cuestionario: {{JSONObj.name}}</h3>
+      </center>
+      <br>
+      <div v-for="question in JSONObj.question" id="todo">
+        <h4 style="color:#F4D03F;">{{ question.pregunta }}</h4>
+        
+        <div v-if="question.tipo === '1'" id="pre1">
           <fieldset>
-            <legend>Eligue una respuesta</legend>
-            <q-option1 v-for="opt in question.opciones" :key="opt.id" v-bind:opcion="opt" v-bind:groupid="question.id"></q-option1>
+            <h6>Elige una respuesta</h6>
+            <q-option1  v-for="opt in question.opciones" :key="opt.id"  v-bind:opcion="opt" v-bind:groupid="question.id"></q-option1>
           </fieldset>
         </div>
-        <div v-else-if="question.tipo === '2'">
+        
+        <div v-else-if="question.tipo === '2'" id="pre2">
           <fieldset>
-            <legend>Eligue una respuesta</legend>
+            <h6>Elige una respuesta</h6>
             <q-option2 v-bind:groupid="question.id"></q-option2>
           </fieldset>
         </div>
-        <div v-else-if="question.tipo === '3'">
+        
+        <div v-else-if="question.tipo === '3'" id="pre3">
           <fieldset>
-            <legend>Eligue una respuesta</legend>
+            <h6>Elige una respuesta</h6>
             <q-option3 v-bind:groupid="question.id"></q-option3>
           </fieldset>
         </div>
       </div>
 
-      <button type="button" name="button" @click="guarda">Enviar Respuesta</button>
+      <center>
+        <button type="button" class="btn btn-primary" name="button" @click="guarda">Enviar Respuesta</button>
+      </center>
+      
     </form>
   </div>
 
