@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type"text/javascript" src="js/papaparse.min.js"></script>
 </head>
 
 <body>
@@ -47,9 +48,9 @@
     <div class="" id="template" v-if="status === 'conectado'">
       <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="menu === true">
         <a class="navbar-brand" href="#" v-on:click="imenu = true, accion = false">My<span class="text-primary"> Socrative</span></a>
-        <a href="#" v-on:click="newc = true, listC = false, genRC = false">Nuevo</a>
-        <a href="#" v-on:click="newc = false, listC = true, genRC = false, opSolicita = 1" @click="nomCuestonarios">Visualizar</a>
-        <a href="#" v-on:click="newc = false, listC = false, genRC = true">Reportes</a>
+        <a href="#" v-on:click="newc = true, listC = false, genRC = false">Nuevo Cuestionario</a>
+        <a href="#" v-on:click="newc = false, listC = true, genRC = false, opSolicita = 1" @click="nomCuestonarios">Ver Cuestionarios</a>
+        <a href="#" v-on:click="newc = false, listC = false, genRC = true">Ver Respuestas</a>
       </nav>
       <div class="" id="imgMenu" v-if="imenu === true" style="background-color: #FDFEFE;">
         <center>
@@ -58,30 +59,30 @@
         <div class="row justify-content-center">
           <div class="col-md-3.5">
             <div class="card mx-auto mx-md-0">
-              <a v-on:click="menu = true, imenu = false, accion = true, newc = true"><img src="images/1.png" alt="Imagen 2" class="card-img-top" alt="crear"></a>
+              <a href="#" v-on:click="menu = true, imenu = false, accion = true, newc = true"><img src="images/1.png" alt="Imagen 2" class="card-img-top" alt="crear"></a>
               <div class="card-body">
                 <center>
-                  <h4 class="card-title">Crear Cuestionarios</h4>
+                  <h4 class="card-title">Nuevo Cuestionario</h4>
                 </center>
               </div>
             </div>
           </div>
           <div class="col-md-3 mt-4 mt-md-0">
             <div class="card mx-auto mx-md-0">
-              <a v-on:click="menu = true, imenu = false, accion = true, opSolicita = 1"><img src="images/2.jpg" alt="Imagen 3" class="card-img-top" alt="visualizar"></a>
+              <a href="#" v-on:click="menu = true, imenu = false, accion = true, opSolicita = 1"><img src="images/2.jpg" alt="Imagen 3" class="card-img-top" alt="visualizar"></a>
               <div class="card-body">
                 <center>
-                  <h4 class="card-title">Visualizar Cuestionarios</h4>
+                  <h4 class="card-title">Ver Cuestionarios</h4>
                 </center>
               </div>
             </div>
           </div>
           <div class="col-md-3 mt-4 mt-md-0">
             <div class="card mx-auto mx-md-0">
-              <a v-on:click="menu = true, imenu = false, accion = true"><img src="images/3.png" alt="Imagen 4" class="card-img-top" alt="estadisticas"></a>
+              <a href="#" v-on:click="menu = true, imenu = false, accion = true"><img src="images/3.png" alt="Imagen 4" class="card-img-top" alt="estadisticas"></a>
               <div class="card-body">
                 <center>
-                  <h4 class="card-title">Estadísticas</h4>
+                  <h4 class="card-title">Ver Respuestas</h4>
                 </center>
               </div>
             </div>
@@ -138,10 +139,10 @@
             <div role="alert" :class="['alert', item.estado ? 'alert-success' : 'alert-danger']">
               <div class="d-flex justify-content-between align-items-center">
                 <div class="">
-                  {{iindex}} - {{item.pregunta}} - {{item.valida}}
+                  {{iindex+1}} - {{item.pregunta}} - {{item.valida}}
                 </div>
                 <div class="">
-                  <button class="btn btn-success btn-sm" @click="editarTarea(iindex)" v-on:click="ac=true, ag=false">OK</button>
+                  <button class="btn btn-success btn-sm" @click="editarTarea(iindex)" v-on:click="ac=true, ag=false">/</button>
                   <button class="btn btn-danger btn-sm" @click="eliminarTarea(iindex)">X</button>
                 </div>
               </div>
@@ -157,9 +158,18 @@
           <div class="" id="solic">
             <input type="text" placeholder="Ingrese nombre del Cuestionario" v-model="inombre">
             <button class="btn  btn-primary" v-on:click="opSolicita = 2" @click="pedirCuestonario">BUSCAR</button>
+            <button class="btn  btn-primary">Respuestas</button>
           </div>
           <div class="" id="respon">
-{{jsonObj2}}
+            <textarea id="json" class="text" v-model="taC"></textarea><br />
+            <input type="checkbox" checked="false" id="quote"/> Wrap values in double quotes
+            <br />
+            <input type="checkbox" checked="true" id="labels"/> Include labels in first row
+            <br />
+            <button @click="convertToCSV">Convert to CSV</button>
+            &nbsp;&nbsp;
+            <textarea id="csv" class="text"></textarea>
+            <button @click="exportCSVFile">Download CSV</button>
           </div>
           <!--div listarC-->
         </div>

@@ -15,8 +15,8 @@ const app = new Vue({
     seeMO: false,
     seeVF: false,
     seeRC: false,
-    ag:false,
-    ac:false,
+    ag: false,
+    ac: false,
 
     //variables clave
     opSolicita: 0,
@@ -25,6 +25,13 @@ const app = new Vue({
     solicita: [],
     jsonObj: {},
     jsonObj2: {},
+    jvsT: [],
+
+    //variables exportCSVFile
+    taC: `[{"Id":1,"UserName":"Sam Smith"},
+            {"Id":2,"UserName":"Fred Frankly"},
+            {"Id":1,"UserName":"Zachary Zupers"}]`,
+    taRes: "",
 
     //variables para el cuestonario
     inombre: '',
@@ -209,7 +216,11 @@ const app = new Vue({
       alert("Usuario fallido");
     },
     messageWs(evt) {
+      this.jvsT = JSON.stringify(evt.data);
+      console.log(this.jvsT);
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
+      this.jvsT = jvs;
+      console.log(this.jvsT);
       if (this.opSolicita == 1) {
         this.jsonObj = JSON.parse(jvs);
         this.opSolicita = 0;
@@ -224,7 +235,90 @@ const app = new Vue({
     sendMessage(msgData) {
       json = JSON.stringify(msgData);
       socket.send(json);
+    },
+    //metodo para imprimir
+    exportCSVFile: function() {
+      //libreria JSON2CSV
+
+      //var csv = this.convertToCSV(this.jvsT);
+      /*var csv = Papa.unparse(this.jsonObj2);*/
+      var json = this.taRes;
+      if (json == "") {
+        alert("no hay nada");
+      } else {
+        var exportedFilenmae = 'fileTitle' + '.csv' || 'export.csv';
+        var blob = new Blob([json], {
+          type: 'text/csv;charset=utf-8;'
+        });
+        if (navigator.msSaveBlob) { // IE 10+
+          navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+          var link = document.createElement("a");
+          if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilenmae);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+      }
+    },
+    convertToCSV: function() {
+      //libreria JSON2CSV
+      var json = $.parseJSON($("#json").val());
+      var array = typeof json != 'object' ? JSON.parse(json) : json;
+      var str = '';
+      var line = '';
+      if ($("#labels").is(':checked')) {
+        var head = array[0];
+        if ($("#quote").is(':checked')) {
+          for (var index in array[0]) {
+            var value = index + "";
+            line += '"' + value.replace(/"/g, '""') + '",';
+          }
+        } else {
+          for (var index in array[0]) {
+            line += index + ',';
+          }
+        }
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+      }
+      for (var i = 0; i < array.length; i++) {
+        var line = '';
+        if ($("#quote").is(':checked')) {
+          for (var index in array[i]) {
+            var value = array[i][index] + "";
+            line += '"' + value.replace(/"/g, '""') + '",';
+          }
+        } else {
+          for (var index in array[i]) {
+            line += array[i][index] + ',';
+          }
+        }
+        line = line.slice(0, -1);
+        str += line + '\r\n';
+      }
+      this.taRes = str;
+      $("#csv").val(str);
     }
+    /*var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+      var str = '';
+      for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+          if (line != '') line += ','
+          line += array[i][index];
+        }
+        str += line + '\r\n';
+      }
+      console.log(str);
+      return str;
+    }*/
   },
   /*created: function() {
     this.connect();
