@@ -1,10 +1,32 @@
-Vue.component('q-option', {
+Vue.component('q-option1', {
+  props: ['opcion', 'groupid'],
+  template: `
+        <label>
+            <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
+        </label>
+    `
+});
+Vue.component('q-option2', {
+  /*data: function(){
+    return{
+      verdadero:"verdadero",
+      falso:"falso"
+    }
+  },*/
+  props: ['groupid'],
+  template: `
+        <label>
+          <input type="radio" :name="groupid" value="1">Verdadero
+          <input type="radio" :name="groupid" value="2">Falso
+        </label>
+    `
+});
+Vue.component('q-option3', {
   props: ['option', 'groupid'],
   template: `
-        <div>
-            <input type="radio" :name="groupid" :value="option.id"> {{ option.text }}
-        </div>
-
+        <label>
+          <input type="text" :name="groupid">
+        </label>
     `
 });
 
@@ -12,10 +34,40 @@ new Vue({
   el: "#test",
   data: {
     status: "",
+    key: "",
     metaData: [],
-    inombre: 'primerCuestonario'
+    inombre: 'personal',
+    JSONObj: {},
+    respuestas: []
   },
   methods: {
+    guarda: function() {
+      /*for (var key in this.JSONObj.question) {
+        console.log(this.JSONObj.question[key].id);
+      }*/
+      for (var sjson in this.JSONObj.question) {
+        this.key = this.JSONObj.question[sjson].id;
+        var result = "0";
+        //console.log(radios);
+        if (this.JSONObj.question[sjson].tipo == 3) {
+          result = document.getElementsByName(this.key)[0].value;
+        } else {
+          var radios = document.getElementsByName(this.key);
+          for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+              result = radios[i].value;
+            }
+          }
+        }
+        this.respuestas.push({
+          id: this.key,
+          pregunta: this.JSONObj.question[sjson].pregunta,
+          respuesta: result
+        });
+      }
+      console.log(this.respuestas);
+      this.sendMessage(this.respuestas);
+    },
     connect() {
       socket = new WebSocket("ws://localhost:4567/alumno");
       socket.onopen = this.openWs;
@@ -28,18 +80,15 @@ new Vue({
       });
       this.status = 'connected';
       alert("Usuario conectado");
-      //console.log(this.inombre);
       this.sendMessage(this.metaData);
     },
     errorWs(evt) {
       alert("Usuario fallido");
     },
     messageWs(evt) {
-      //var str = evt.data;
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
-      //console.log(jvs);
-      JSONObj = JSON.parse(jvs);
-      console.log(JSONObj);
+      this.JSONObj = JSON.parse(jvs);
+      console.log(this.JSONObj);
     },
     sendMessage(msgData) {
       json = JSON.stringify(msgData);
