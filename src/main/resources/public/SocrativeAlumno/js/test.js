@@ -80,16 +80,13 @@ new Vue({
       });
       this.status = 'connected';
       alert("Usuario conectado");
-      //console.log(this.inombre);
       this.sendMessage(this.metaData);
     },
     errorWs(evt) {
       alert("Usuario fallido");
     },
     messageWs(evt) {
-      //var str = evt.data;
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
-      //console.log(jvs);
       this.JSONObj = JSON.parse(jvs);
       console.log(this.JSONObj);
     },

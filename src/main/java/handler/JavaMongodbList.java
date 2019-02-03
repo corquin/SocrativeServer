@@ -1,9 +1,16 @@
 package handler;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 import org.bson.Document;
 import com.mongodb.Block;
+import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 public class JavaMongodbList {
@@ -16,6 +23,7 @@ public class JavaMongodbList {
 		setMongodb(getMongoClient().getDatabase("cuestonario"));
 	}
 
+	@SuppressWarnings("deprecation")
 	public void listRestaurants() {
 		FindIterable<Document> iterable = getMongodb().getCollection("restaurants").find();
 		iterable.forEach(new Block<Document>() {
@@ -26,6 +34,7 @@ public class JavaMongodbList {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	public void listRestaurantsByCuisine(String cuisine) {
 		// We return documents with the find method by setting a <b>criteria</ b>
 		// element equal to the cuisine.
@@ -41,6 +50,23 @@ public class JavaMongodbList {
 				System.out.println(document);
 			}
 		});
+	}
+	
+	public void listar() {
+		/*MongoClient mongoClient = new MongoClient();
+		MongoCursor<String> dbsCursor = mongoClient.listDatabaseNames().iterator();
+		while(dbsCursor.hasNext()) {
+		    System.out.println(dbsCursor.next());
+		}*/
+		MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+		
+		DB db = mongoClient.getDB( "cuestonario" );
+		
+		Set<String> result = db.getCollectionNames();
+		for (String s : result) {
+		    System.out.println(s);
+		}
+
 	}
 
 	public MongoClient getMongoClient() {
@@ -63,7 +89,8 @@ public class JavaMongodbList {
 		JavaMongodbList javaMongodbList = new JavaMongodbList();
 		javaMongodbList.connectDatabase();
 		//javaMongodbList.listRestaurants();
-		javaMongodbList.listRestaurantsByCuisine("Galician");
+		//javaMongodbList.listRestaurantsByCuisine("Galician");
+		javaMongodbList.listar();
 	}
 
 }

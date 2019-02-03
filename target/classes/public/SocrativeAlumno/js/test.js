@@ -47,10 +47,10 @@ new Vue({
       }*/
       for (var sjson in this.JSONObj.question) {
         this.key = this.JSONObj.question[sjson].id;
-        var result = "0";        
+        var result = "0";
         //console.log(radios);
         if (this.JSONObj.question[sjson].tipo == 3) {
-          result = document.getElementById(this.key).value;
+          result = document.getElementsByName(this.key)[0].value;
         } else {
           var radios = document.getElementsByName(this.key);
           for (var i = 0; i < radios.length; i++) {
@@ -80,16 +80,13 @@ new Vue({
       });
       this.status = 'connected';
       alert("Usuario conectado");
-      //console.log(this.inombre);
       this.sendMessage(this.metaData);
     },
     errorWs(evt) {
       alert("Usuario fallido");
     },
     messageWs(evt) {
-      //var str = evt.data;
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
-      //console.log(jvs);
       this.JSONObj = JSON.parse(jvs);
       console.log(this.JSONObj);
     },
