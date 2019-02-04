@@ -72,45 +72,12 @@ body{
 }
 
 #todo{
-   background-color: #3498DB;
-    padding:2px;
-    cursor:pointer;
-    display:block;
-    width:620px;
-    height: 150px;
-    margin: 0 auto;
-    text-align:left;
-    border: #3b4652;    
+    background-image: url("https://image.jimcdn.com/app/cms/image/transf/none/path/sc77e1e58a42c514a/image/i9977c7b3a6db203a/version/1516578954/image.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    width: 700px;
+ 
 }
-
-#pre1{
-    border: 1px solid #7DA5E0;
-    padding: 1px;
-    margin: 10px;
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #7FB3D5;
-    color: #F4F6F7;
-}
-#pre2{
-    border: 1px solid #F4D03F  ;
-    padding: 1px;
-    margin: 10px;
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #F7DC6F;
-    color: #F4F6F7;
-}
-
-#pre3{
-    border: 1px solid  #1D8348;
-    padding: 1px;
-    margin: 10px;
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #2ECC71;
-    color: #F4F6F7;
+.form-check, #correcta{
+    text-align: left;
 }

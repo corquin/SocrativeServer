@@ -8,20 +8,22 @@
   <title>Socrative Alumno</title>
 
   <link rel="stylesheet" href="css/styler.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 
 </head>
 
 <body>
 
-  <br>
+  
   <br>
   <h1 id="title_form">My Socrative</h1>
   <br>
   <br>
+  
   <div id="test">
-    
+
     <div class="modal-content" v-if="!status" id="form">
       <div class="col-12 user-img">
         <img src="images/lo.jpg" th:src="@{/img/user.png}" />
@@ -37,41 +39,52 @@
       </div>
     </div>
 
-    <form v-if="status ==='connected'">
-      <center>
-        <h3 style="color: #2874A6;">Nombre Cuestionario: {{JSONObj.name}}</h3>
-      </center>
-      <br>
-      <div v-for="question in JSONObj.question" id="todo">
-        <h4 style="color:#F4D03F;">{{ question.pregunta }}</h4>
-        
-        <div v-if="question.tipo === '1'" id="pre1">
-          <fieldset>
-            <h6>Elige una respuesta</h6>
-            <q-option1  v-for="opt in question.opciones" :key="opt.id"  v-bind:opcion="opt" v-bind:groupid="question.id"></q-option1>
-          </fieldset>
-        </div>
-        
-        <div v-else-if="question.tipo === '2'" id="pre2">
-          <fieldset>
-            <h6>Elige una respuesta</h6>
-            <q-option2 v-bind:groupid="question.id"></q-option2>
-          </fieldset>
-        </div>
-        
-        <div v-else-if="question.tipo === '3'" id="pre3">
-          <fieldset>
-            <h6>Elige una respuesta</h6>
-            <q-option3 v-bind:groupid="question.id"></q-option3>
-          </fieldset>
-        </div>
-      </div>
-
-      <center>
-        <button type="button" class="btn btn-primary" name="button" @click="guarda">Enviar Respuesta</button>
-      </center>
+    <center>
+        <form v-if="status ==='connected'" id="todo">
+            <center>
+              <h3 style="color:#36434C;">Nombre Cuestionario: <span style="color: #2874A6;">{{JSONObj.name}}</span></h3>
+            </center>
+            <br>
       
-    </form>
+            <center>
+                <div class="" v-for="question in JSONObj.question" id="">
+                    <h4 style="color:#2471A3;">{{ question.pregunta }}</h4>
+            
+                    <div v-if="question.tipo === '1'" id="">
+                      <fieldset>
+                        <h6 style="text-align: left; padding-left: 5em;">Elige una respuesta</h6>
+                        <q-option1 style="padding-left: 5em;" v-for="opt in question.opciones" :key="opt.id" v-bind:opcion="opt" v-bind:groupid="question.id"></q-option1>
+                      </fieldset>
+                    </div>
+                    
+                    <div v-else-if="question.tipo === '2'" id="">
+                      <fieldset>
+                        <h6 style="text-align: left; padding-left: 5em;">Elige una respuesta</h6>
+                        <q-option2 style="padding-left: 5em;" v-bind:groupid="question.id"></q-option2>
+                      </fieldset>
+                    </div>
+                    
+                    <div v-else-if="question.tipo === '3'" id="">
+                      <fieldset>
+                        <h6 style="text-align: left; padding-left: 5em;">Elige una respuesta</h6>
+                        <q-option3 style="padding-left: 5em;" v-bind:groupid="question.id"></q-option3>
+                      </fieldset>
+                    </div>
+            
+                  </div>
+            </center>
+            
+            <br>
+            <center>
+              <button type="button" class="btn btn-secondary btn-sm" name="button" @click="guarda">Enviar Respuesta</button>
+            </center>
+      
+      
+      
+          </form>
+
+    </center>
+   
   </div>
 
 

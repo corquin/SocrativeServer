@@ -72,15 +72,9 @@ body{
 }
 
 #todo{
-   background-color: #3498DB;
-    padding:2px;
-    cursor:pointer;
-    display:block;
-    width:620px;
-    height: 150px;
-    margin: 0 auto;
-    text-align:left;
-    border: #3b4652;    
+    background-image: url("https://image.jimcdn.com/app/cms/image/transf/none/path/sc77e1e58a42c514a/image/i9977c7b3a6db203a/version/1516578954/image.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;;    
 }
 
 #pre1{

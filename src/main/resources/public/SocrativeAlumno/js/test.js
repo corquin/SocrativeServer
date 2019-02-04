@@ -1,9 +1,13 @@
 Vue.component('q-option1', {
   props: ['opcion', 'groupid'],
   template: `
-        <label>
-            <input type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
-        </label>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="radio" :name="groupid" :value="opcion.id"> {{opcion.opc}}
+            </label        
+        </div>
+        <br>
+        <br>
     `
 });
 Vue.component('q-option2', {
@@ -15,18 +19,27 @@ Vue.component('q-option2', {
   },*/
   props: ['groupid'],
   template: `
-        <label>
-          <input type="radio" :name="groupid" value="1">Verdadero
-          <input type="radio" :name="groupid" value="2">Falso
-        </label>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="radio" :name="groupid" value="1">Verdadero
+            </label>
+            <br>
+            <label class="form-check-label">
+                <input class="form-check-input" type="radio" :name="groupid" value="2">Falso
+            </label>
+        </div>
+        <br>
+        <br>
     `
 });
 Vue.component('q-option3', {
   props: ['option', 'groupid'],
   template: `
-        <label>
-          <input type="text" :name="groupid">
-        </label>
+        <div id="correcta">
+            <label>
+                <input class="form-control form-control-sm" type="text" :name="groupid">
+            </label>
+        </div>
     `
 });
 
