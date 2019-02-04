@@ -10,7 +10,7 @@ public class MainSocrative {
 		if (ent == 1) {*/
 			new ProfWSSocrative().inicia();
 		//} else {
-		//new AlumWSSocrative().inicia();
+			//new AlumWSSocrative().inicia();
 		//}
 
 	}

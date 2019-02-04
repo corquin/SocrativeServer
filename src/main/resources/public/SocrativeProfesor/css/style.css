@@ -5,8 +5,6 @@ body{
     background-image: url("https://img.freepik.com/foto-gratis/aula-escuela-fondo-borroso-joven-estudiante-vista-borrosa-sala-clase-primaria-nino-o-profesor-sillas-mesas-campus-imagenes-estilo-efecto-vintage_1253-1375.jpg?size=626&ext=jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
-    
-
 }
 
 .navbar-brand{
@@ -69,15 +67,6 @@ header{
 /*Formulario de crear los cuestionarios solo botones*/
 
 
-input, #nombrecue{
-    background-color: #FDFEFE;
-    color: #566573;
-    border-radius: 2px;
-    border: #566573;
-    height: 50px;
-    
-}
-
 #pri{    
     width: 50%;
     
@@ -114,16 +103,13 @@ input, #nombrecue{
     position: relative;
     
 }
-input{
-    display: block;	
-}
-input{
+#divPre input{
     width: 620px;
-    
+    display: block;
 	border: none;
 	border-radius: 5px;
 }
-input, #numero{
+#divPr input, #numero{
     background-color: #AED6F1;
     border-radius: 5px;
     width: 25%;
@@ -170,3 +156,10 @@ input, #numero{
 .btn-outline-secondary{
     color: black;
 }
+
+#listTest, .justify-content-center{
+    background-image: url("https://image.jimcdn.com/app/cms/image/transf/none/path/sc77e1e58a42c514a/image/i9977c7b3a6db203a/version/1516578954/image.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+

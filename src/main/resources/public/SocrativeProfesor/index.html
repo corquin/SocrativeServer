@@ -8,7 +8,7 @@
 
   <title>My Socrative</title>
 
-  <!-- Bootstrap CSS -->  
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
@@ -65,14 +65,14 @@
         </li>
 
       </ul>
-<br>
+      <br>
       <div class="" id="imgMenu" v-if="imenu === true" style="background-color: #FDFEFE;">
         <center>
           <h2 style="color: blue;">Bienvenido Profesor</h2>
         </center>
         <br>
         <div class="row justify-content-center">
-          <div class="col-md-3.5">
+          <div class="col-md-3 mt-4 mt-md-0">
             <div class="card mx-auto mx-md-0">
               <a href="#" v-on:click="menu = true, imenu = false, accion = true, newc = true"><img src="images/1.png"
                   alt="Imagen 2" class="card-img-top" alt="crear"></a>
@@ -85,7 +85,7 @@
           </div>
           <div class="col-md-3 mt-4 mt-md-0">
             <div class="card mx-auto mx-md-0">
-              <a href="#" v-on:click="menu = true, imenu = false, accion = true, opSolicita = 1"><img src="images/2.jpg"
+              <a href="#" v-on:click="menu = true, imenu = false, accion = true, opSolicita = 1"><img src="images/2.png"
                   alt="Imagen 3" class="card-img-top" alt="visualizar"></a>
               <div class="card-body">
                 <center>
@@ -108,7 +108,7 @@
         </div>
       </div>
       <div class="" id="interna" v-if="accion === true">
-        <div class="" v-if="newc === true">
+        <div id="divPre" class="" v-if="newc === true">
           <center>
             <div class="input-group mb-3" id="pri">
               <input type="text" class="form-control" placeholder="Ingrese nombre del Cuestionario" v-model="inombre">
@@ -174,27 +174,68 @@
           </div>
           <!--div nuevoC-->
         </div>
+        <br>
         <div class="" id="listTest" v-if="listC === true">
-          <h3> Cuestionarios Disponibles:</h3>
-          <div class="" id="getCollect" v-for="colle in jsonObj.collections">
-            <input type="radio" :value="colle.nombre" v-model="inombre"> {{colle.nombre}}
+          <center>
+            <h3 style="color:cornflowerblue;">Cuestionarios Disponibles:</h3>
+          </center>
+          <br>
+          <div class="row">
+            <div class="col-sm-4" style="padding-left: 5em;">
+              <div class="form-check" id="getCollect" v-for="colle in jsonObj.collections">
+                <input class="form-check-input" type="radio" :value="colle.nombre" v-model="inombre">
+                <label class="form-check-label" for="exampleRadios1">
+                  {{colle.nombre}}
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-5" style="padding-left: -5em;">
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="Ingrese nombre del Cuestionario" v-model="inombre">
+
+                <div class="input-group-append">
+                  <button id="buscar" class="btn btn-outline-secondary" v-on:click="opSolicita = 2" @click="pedirCuestonario">Buscar</button>
+                  <button id="respuestas" class="btn btn-outline-secondary">Respuestas</button>
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" id="json" class="text" v-model="taC"></textarea><br />
+              </div>
+            </div>
           </div>
-          <div class="" id="solic">
-            <input type="text" placeholder="Ingrese nombre del Cuestionario" v-model="inombre">
-            <button class="btn  btn-primary" v-on:click="opSolicita = 2" @click="pedirCuestonario">BUSCAR</button>
-            <button class="btn  btn-primary">Respuestas</button>
+
+          <hr style="height: 10px;
+          width: 75%;
+          background-color: #2471A3;">
+          <br>
+
+          <div class="row" id="respon">
+            <div class="col-sm-4" style="padding-left: 5em;">
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" checked="false" id="quote" /> Incorporar Comillas
+                  <br>
+                  <input class="form-check-input"type="checkbox" checked="true" id="labels" /> Incluir Encabezados
+              </div>
+              
+            </div>
+
+
+            <div class="col-sm-5">
+              <div>
+                <button class="btn btn-primary" @click="convertToCSV">Convertir a CSV</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-primary" @click="exportCSVFile">Descargar CSV</button>
+              </div>
+              <br>
+
+              <div class="form-group">
+                <textarea class="form-control" rows="5" id="csv" class="text"></textarea>
+              </div>
+            </div>
+
           </div>
-          <div class="" id="respon">
-            <textarea id="json" class="text" v-model="taC"></textarea><br />
-            <input type="checkbox" checked="false" id="quote" /> Wrap values in double quotes
-            <br />
-            <input type="checkbox" checked="true" id="labels" /> Include labels in first row
-            <br />
-            <button @click="convertToCSV">Convert to CSV</button>
-            &nbsp;&nbsp;
-            <textarea id="csv" class="text"></textarea>
-            <button @click="exportCSVFile">Download CSV</button>
-          </div>
+
           <!--div listarC-->
         </div>
         <!--div interna-->

@@ -1,3 +1,12 @@
+body{
+	padding: 0;
+	margin: 0;
+    font-family: 'lato', sans-serif;
+    background-image: url("https://img.freepik.com/foto-gratis/aula-escuela-fondo-borroso-joven-estudiante-vista-borrosa-sala-clase-primaria-nino-o-profesor-sillas-mesas-campus-imagenes-estilo-efecto-vintage_1253-1375.jpg?size=626&ext=jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+
 #title_form{
 	text-align: center;
 	color: #2980B9;

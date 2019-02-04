@@ -36,7 +36,7 @@ new Vue({
     status: "",
     key: "",
     metaData: [],
-    inombre: 'personal',
+    inombre: '',
     JSONObj: {},
     respuestas: []
   },
