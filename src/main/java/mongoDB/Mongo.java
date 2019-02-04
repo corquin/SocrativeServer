@@ -24,7 +24,7 @@ public class Mongo {
 	}
 
 	public void connectDatabase(String nombre) {
-		setMongoClient(new MongoClient());
+		setMongoClient(new MongoClient("localhost" , 27017));
 		setMongodb(getMongoClient().getDatabase(nombre));
 	}
 

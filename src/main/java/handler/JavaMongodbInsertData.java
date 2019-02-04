@@ -114,8 +114,8 @@ public class JavaMongodbInsertData {
 	public static void main(String args[]) {
 		JavaMongodbInsertData javaMongodbInsertData = new JavaMongodbInsertData();
 		javaMongodbInsertData.connectDatabase();
-		//javaMongodbInsertData.insertManyDataTest();
-		javaMongodbInsertData.insertOneDataTest();
+		javaMongodbInsertData.insertManyDataTest();
+		//javaMongodbInsertData.insertOneDataTest();
 		System.out.println("correcto");
 	}
 }

@@ -3,6 +3,7 @@ package main;
 import static spark.Spark.init;
 import static spark.Spark.webSocket;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,21 +36,23 @@ public class AlumWSSocrative {
 	public static void broadcastMessage(String sender, String message) {
 		userUsernameMap.keySet().stream().filter(Session::isOpen).forEach(session -> {
 			try {
-				numMsg++;
-				if (numMsg == 1) {
-					nomTest = DecoJSON.obtData(message);
-					String jsonCuesto = new ListData().getData(nomTest.replace("\"", ""));
-					session.getRemote().sendString(jsonCuesto);
-				}
-				if (numMsg == 2) {
-					System.out.println(message);
-					new InsertData().insertResult(message);
-					// new InsertData().insert(message, nomTest.replace("\"", ""));
-					numMsg = 0;
-				}
+				ArrayList<String> parseJson = DecoJSON.jsonObj_parse(message);
+				String key = DecoJSON.obtKey(parseJson);
+				System.out.println(key);
+				String titulo = DecoJSON.obtName(parseJson);
+				System.out.println(titulo);
+				switch (Integer.parseInt(key.replace("\"", ""))) {
+				case 1:					
+					String jsonD = new ListData().getData(titulo.replace("\"", ""));
+					session.getRemote().sendString(jsonD);
+					break;
+				case 2:
+					new InsertData().insertResult(parseJson, titulo.replace("\"", ""), sender);
+					break;
+				}				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}			
 		});
 	}
 

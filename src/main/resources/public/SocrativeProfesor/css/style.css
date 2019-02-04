@@ -2,8 +2,13 @@ body{
 	padding: 0;
 	margin: 0;
     font-family: 'lato', sans-serif;
+    background-image: url("https://img.freepik.com/foto-gratis/aula-escuela-fondo-borroso-joven-estudiante-vista-borrosa-sala-clase-primaria-nino-o-profesor-sillas-mesas-campus-imagenes-estilo-efecto-vintage_1253-1375.jpg?size=626&ext=jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
     
+
 }
+
 .navbar-brand{
 	font-family: 'Pacifico', sans-serif;
 	font-size: 2rem;
@@ -15,9 +20,12 @@ body{
 }
 
 /*Fomulario de entrada*/
+header{
+    padding-top: 2em;
+}
 #title_form{
 	text-align: center;
-	color: #2980B9;
+    color: #0E5B8D;
 }
 
 .main-section{
@@ -53,32 +61,14 @@ body{
     border-radius: 10px;
 }
 
-.form-group::before{
-    font-family: "Font Awesome\ 5 Free";
-    position: absolute;
-    left: 28px;
-    font-size: 22px;
-    padding-top:4px;
+#boton{    
+    width: 100px;
 }
 
-.form-group#user-group::before{
-	content: "\f007";
-	
-}
-
-.form-group#contrasena-group::before{
-    content: "\f023";
-}
-.forgot{
-    padding: 5px 0;
-}
 
 /*Formulario de crear los cuestionarios solo botones*/
 
-h2{
-    font-family: "Font Awesome\ 5 Free";
-    color: #1F618D;
-}
+
 input, #nombrecue{
     background-color: #FDFEFE;
     color: #566573;
@@ -87,50 +77,33 @@ input, #nombrecue{
     height: 50px;
     
 }
-#botonpri, #b{
-   
-    position: absolute;
-    text-align: right;
+
+#pri{    
+    width: 50%;
     
-    top: 60px;
-    left: 600px;
 }
+
 #botonesprincipales{
     width: 550px; 
     margin: 0 auto;
 }
 #boton1{
-    text-decoration: none;
-    padding: 10px;
-    font-weight: 600;
-    font-size: 20px;
-    color: #ffffff;
+    
     background-color: #1883ba;
-    border-radius: 6px;
-    border: 2px solid #0016b0;
-    margin-left: 30px;
+    margin-left: 2em;
+    color: black;        
 }
 #boton2{
-    text-decoration: none;
-    padding: 10px;
-    font-weight: 600;
-    font-size: 20px;
-    color: #ffffff;
+
     background-color: #82E0AA;
-    border-radius: 6px;
-    border: 2px solid #28B463;
-    margin-left: 30px;
+    margin-left: 2em;
+    color: black;        
 }
 #boton3{
-    text-decoration: none;
-    padding: 10px;
-    font-weight: 600;
-    font-size: 20px;
-    color: #ffffff;
+   
     background-color:#F4D03F;
-    border-radius: 6px;
-    border: 2px solid #D4AC0D;
-    margin-left: 30px;
+    margin-left: 2em;
+    color: black;        
 }
 /*Parte del formulairo solo las cajas*/
 #multi{
@@ -153,7 +126,7 @@ input{
 input, #numero{
     background-color: #AED6F1;
     border-radius: 5px;
-    color: #FDFEFE;
+    width: 25%;
 }
 
 /*---------------------------------*/
@@ -167,8 +140,8 @@ input, #numero{
 }
 #opciones{
     background-color: #ABEBC6;
-    border-radius: 5px;
-    color: #FDFEFE;
+    border-radius: 5px;    
+    width: 25%;
 }
 
 /*--------------------------------*/
@@ -180,7 +153,20 @@ input, #numero{
     position: relative;
 }
 #estilo{
-    background-color: #f9e79f;
+    background-color: #ABEBC6;
     border-radius: 5px;
-    color: #FDFEFE;
+    width: 50%;
+    
+}
+
+/*-----------*/
+.navbar-brand, .nav-link{
+    color: black; 
+}
+#log{
+    background-color: white;
+    padding-left: 1em;
+}
+.btn-outline-secondary{
+    color: black;
 }

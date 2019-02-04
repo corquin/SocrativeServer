@@ -1,1 +1,41 @@
+<<<<<<< HEAD
 /target/
+=======
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# Idea
+.idea
+*.iml
+*.iws
+*.ipr
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Gradle
+.gradle
+!gradle-wrapper.jar
+
+# Maven
+target
+
+# Build
+out
+build
+bin
+
+# Other
+*.log
+*.swp
+*.bak
+>>>>>>> 9563bb788ba0f5f4bb0d65eb24f66f76af11c0da

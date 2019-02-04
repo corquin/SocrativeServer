@@ -8,9 +8,9 @@ public class MainSocrative {
 		/*Scanner data = new Scanner(System.in);
 		var ent = data.nextInt();
 		if (ent == 1) {*/
-			//new ProfWSSocrative().inicia();
+			new ProfWSSocrative().inicia();
 		//} else {
-			new AlumWSSocrative().inicia();
+		//new AlumWSSocrative().inicia();
 		//}
 
 	}
