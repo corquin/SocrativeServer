@@ -22,17 +22,16 @@ public class InsertData {
 		System.out.println("guardado");
 	}
 
-	public void insertResult(String json) {
+	public void insertResult(ArrayList<String> preguntas, String nomTest, String sender) {
 		Mongo mongodb = new Mongo();
 		mongodb.connectDatabase("respuestas");
 		
-		mongodb.getMongodb().getCollection("responde1").drop();
+		mongodb.getMongodb().getCollection(nomTest+"_respuesta_"+sender).drop();
 		Document docu;
 		
-		ArrayList<String> preguntas = DecoJSON.jsonObj_parse(json);
 		for (int i = 0; i < preguntas.size(); i++) {
 			docu = Document.parse(preguntas.get(i));
-			mongodb.getMongodb().getCollection("responde1").insertOne(docu);
+			mongodb.getMongodb().getCollection(nomTest+"_respuesta_"+sender).insertOne(docu);
 		}
 
 		System.out.println("guardado respuestas");

@@ -25,7 +25,7 @@ const app = new Vue({
     solicita: [],
     jsonObj: {},
     jsonObj2: {},
-    jvsT: [],
+    jvsT: "",
 
     //variables exportCSVFile
     taC: `[{"Id":1,"UserName":"Sam Smith"},
@@ -198,6 +198,17 @@ const app = new Vue({
       this.sendMessage(this.solicita);
       this.solicita = [];
     },
+    //presentamos preguntas
+    presenCuesto() {
+      var est = 0;
+      for (var i = 0; i < this.jvsT.length; i++) {
+        var char = this.jvsT.charAt(i);
+        if (char == '[' && est == 0) {
+          est = i;
+        }
+      }
+      this.taC = this.jvsT.substring(est, this.jvsT.length - 1);
+    },
 
     //metodos de conexion a WebSocket
     connect() {
@@ -216,20 +227,19 @@ const app = new Vue({
       alert("Usuario fallido");
     },
     messageWs(evt) {
-      this.jvsT = JSON.stringify(evt.data);
-      console.log(this.jvsT);
       var jvs = JSON.stringify(eval("(" + evt.data + ")"));
-      this.jvsT = jvs;
-      console.log(this.jvsT);
       if (this.opSolicita == 1) {
         this.jsonObj = JSON.parse(jvs);
         this.opSolicita = 0;
         console.log(this.jsonObj);
       }
       if (this.opSolicita == 2) {
+        this.jvsT = jvs;
+        console.log(this.jvsT);
         this.jsonObj2 = JSON.parse(jvs);
         this.opSolicita = 0;
         console.log(this.jsonObj2);
+        this.presenCuesto();
       }
     },
     sendMessage(msgData) {
@@ -239,14 +249,11 @@ const app = new Vue({
     //metodo para imprimir
     exportCSVFile: function() {
       //libreria JSON2CSV
-
-      //var csv = this.convertToCSV(this.jvsT);
-      /*var csv = Papa.unparse(this.jsonObj2);*/
       var json = this.taRes;
       if (json == "") {
         alert("no hay nada");
       } else {
-        var exportedFilenmae = 'fileTitle' + '.csv' || 'export.csv';
+        var exportedFilenmae = this.jsonObj2.name + '.csv' || 'export.csv';
         var blob = new Blob([json], {
           type: 'text/csv;charset=utf-8;'
         });
@@ -306,19 +313,6 @@ const app = new Vue({
       this.taRes = str;
       $("#csv").val(str);
     }
-    /*var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-      var str = '';
-      for (var i = 0; i < array.length; i++) {
-        var line = '';
-        for (var index in array[i]) {
-          if (line != '') line += ','
-          line += array[i][index];
-        }
-        str += line + '\r\n';
-      }
-      console.log(str);
-      return str;
-    }*/
   },
   /*created: function() {
     this.connect();

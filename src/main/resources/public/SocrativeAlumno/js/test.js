@@ -42,13 +42,9 @@ new Vue({
   },
   methods: {
     guarda: function() {
-      /*for (var key in this.JSONObj.question) {
-        console.log(this.JSONObj.question[key].id);
-      }*/
       for (var sjson in this.JSONObj.question) {
         this.key = this.JSONObj.question[sjson].id;
         var result = "0";
-        //console.log(radios);
         if (this.JSONObj.question[sjson].tipo == 3) {
           result = document.getElementsByName(this.key)[0].value;
         } else {
@@ -65,9 +61,26 @@ new Vue({
           respuesta: result
         });
       }
+      this.respuestas.push({
+        titulo: this.inombre
+      });
+      this.respuestas.push({
+        key: '2'
+      });
       console.log(this.respuestas);
       this.sendMessage(this.respuestas);
     },
+    //solicitamos cuestonario
+    solCuesto(){
+      this.metaData.push({
+        titulo: this.inombre
+      });
+      this.metaData.push({
+        key: '1'
+      });
+      this.sendMessage(this.metaData);
+    },
+    //metodos WebSocket
     connect() {
       socket = new WebSocket("ws://localhost:4567/alumno");
       socket.onopen = this.openWs;
@@ -75,12 +88,9 @@ new Vue({
       socket.onmessage = this.messageWs;
     },
     openWs() {
-      this.metaData.push({
-        nombre: this.inombre
-      });
       this.status = 'connected';
       alert("Usuario conectado");
-      this.sendMessage(this.metaData);
+      this.solCuesto();
     },
     errorWs(evt) {
       alert("Usuario fallido");
