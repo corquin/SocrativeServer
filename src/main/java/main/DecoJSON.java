@@ -6,13 +6,14 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class DecoJSON {
+	/*
 	public static String obtData(String json) {
 		json = json.replace("[", "");
 		json = json.replace("]", "");
 		System.out.println(json);
 		JsonObject jobt = new Gson().fromJson(json, JsonObject.class);
 		return jobt.get("nombre").toString();
-	}
+	}*/
 
 	//obtenemos la key del jsonString segun la accion del profesor
 	public static String obtKey(ArrayList<String> parseJson) {
