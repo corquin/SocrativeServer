@@ -246,73 +246,7 @@ const app = new Vue({
       json = JSON.stringify(msgData);
       socket.send(json);
     },
-    //metodo para imprimir
-    exportCSVFile: function() {
-      //libreria JSON2CSV
-      var json = this.taRes;
-      if (json == "") {
-        alert("no hay nada");
-      } else {
-        var exportedFilenmae = this.jsonObj2.name + '.csv' || 'export.csv';
-        var blob = new Blob([json], {
-          type: 'text/csv;charset=utf-8;'
-        });
-        if (navigator.msSaveBlob) { // IE 10+
-          navigator.msSaveBlob(blob, exportedFilenmae);
-        } else {
-          var link = document.createElement("a");
-          if (link.download !== undefined) { // feature detection
-            // Browsers that support HTML5 download attribute
-            var url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", exportedFilenmae);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
-        }
-      }
-    },
-    convertToCSV: function() {
-      //libreria JSON2CSV
-      var json = $.parseJSON($("#json").val());
-      var array = typeof json != 'object' ? JSON.parse(json) : json;
-      var str = '';
-      var line = '';
-      if ($("#labels").is(':checked')) {
-        var head = array[0];
-        if ($("#quote").is(':checked')) {
-          for (var index in array[0]) {
-            var value = index + "";
-            line += '"' + value.replace(/"/g, '""') + '",';
-          }
-        } else {
-          for (var index in array[0]) {
-            line += index + ',';
-          }
-        }
-        line = line.slice(0, -1);
-        str += line + '\r\n';
-      }
-      for (var i = 0; i < array.length; i++) {
-        var line = '';
-        if ($("#quote").is(':checked')) {
-          for (var index in array[i]) {
-            var value = array[i][index] + "";
-            line += '"' + value.replace(/"/g, '""') + '",';
-          }
-        } else {
-          for (var index in array[i]) {
-            line += array[i][index] + ',';
-          }
-        }
-        line = line.slice(0, -1);
-        str += line + '\r\n';
-      }
-      this.taRes = str;
-      $("#csv").val(str);
-    }
+    
   },
   /*created: function() {
     this.connect();
